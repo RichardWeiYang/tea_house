@@ -16,11 +16,13 @@
         <tr>
           <td><%= link_to(home.name, home_path(home)) %></td>
           <td><%= home.address %></td>
+          <% if current_user && current_user.is_admin %>
           <td>
               <%= link_to("Edit", edit_home_path(home), class: "btn btn-sm btn-default")%>
               <%= link_to("Delete", home_path(home),    class: "btn btn-sm btn-default",
                           method: :delete, data: { confirm: "Are you sure?" } )%>
           </td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
