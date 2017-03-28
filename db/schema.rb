@@ -10,14 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323100623) do
+ActiveRecord::Schema.define(version: 20170328143526) do
+
+  create_table "districts", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "homes", force: :cascade do |t|
     t.string   "name"
     t.string   "address"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "district_id"
+    t.index ["district_id"], name: "index_homes_on_district_id"
   end
 
   create_table "users", force: :cascade do |t|
