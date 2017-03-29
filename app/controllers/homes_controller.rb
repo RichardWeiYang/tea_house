@@ -1,8 +1,17 @@
 class HomesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :edit, :update, :destroy, :create]
+  before_action :require_is_admin, only: [:new, :edit, :update, :destroy, :create]
 
 
   def index
     @homes = Home.all
+
+    if params[:dist_ids].present?
+      #flash[:notice] = "District #{params[:dist_ids].split(",")}"
+      @homes = @homes.where( :district_id => params[:dist_ids] )
+    end
+
+    @homes = @homes.paginate(:page => params[:page], :per_page => 5)
   end
 
   def show

@@ -1,4 +1,12 @@
 <div class="col-md-12">
+  <div class="group">
+  <%= form_tag homes_path, :method => :get do %>
+  选择区县
+  <%= select_tag :dist_ids, options_for_select(District.all.map{ |c| [c.name, c.id] }, params[:dist_ids]), :multiple => true , :class => "form-control" %>
+  <%= submit_tag "Submit" %>
+  <% end %>
+  </div>
+
   <% if current_user && current_user.is_admin %>
   <div class="group">
     <%= link_to("添加茶家", new_home_path, class: "btn btn-primary pull-right") %>
@@ -28,3 +36,10 @@
     </tbody>
   </table>
 </div>
+<div class="text-center">
+  <%= will_paginate @homes %>
+</div>
+
+<script>
+  $("#dist_ids").select2();
+</script>
