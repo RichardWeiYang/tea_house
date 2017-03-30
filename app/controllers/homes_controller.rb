@@ -54,7 +54,7 @@ class HomesController < ApplicationController
   private
 
   def home_params
-    params.require(:home).permit(:name, :address, :district_id)
+    params.require(:home).permit(:name, :address, :district_id, :eventdate_ids => [])
   end
 
 end
