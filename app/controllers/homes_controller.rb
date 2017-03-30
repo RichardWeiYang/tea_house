@@ -11,6 +11,11 @@ class HomesController < ApplicationController
       @homes = @homes.where( :district_id => params[:dist_ids] )
     end
 
+    if params[:ed_ids].present?
+      #flash[:notice] = "District #{params[:dist_ids].split(",")}"
+      @homes = @homes.includes(:eventdateships).where( :eventdateships => { :eventdate_id => params[:ed_ids] } )
+    end
+
     @homes = @homes.paginate(:page => params[:page], :per_page => 5)
   end
 

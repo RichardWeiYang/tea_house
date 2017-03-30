@@ -3,6 +3,8 @@
   <%= form_tag homes_path, :method => :get do %>
   选择区县
   <%= select_tag :dist_ids, options_for_select(District.all.map{ |c| [c.name, c.id] }, params[:dist_ids]), :multiple => true , :class => "form-control" %>
+  选择时间
+  <%= select_tag :ed_ids, options_for_select(Eventdate.all.map{ |c| [c.name, c.id] }, params[:ed_ids]), :multiple => true , :class => "form-control" %>
   <%= submit_tag "Submit" %>
   <% end %>
   </div>
@@ -41,5 +43,6 @@
 </div>
 
 <script>
+  $("#ed_ids").select2();
   $("#dist_ids").select2();
 </script>
